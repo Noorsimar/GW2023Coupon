@@ -57,15 +57,15 @@ def valid_coupons(amount):
         print(promo_code, "NOT Valid")
 
 
-class Cart:
-
-    def __init__(self, item_names, quantities, price, dishes):
-        self.item_names = item_names
-        self.quantities = quantities
-        self.dishes = dishes
-        print(self.item_names)
-        print(self.quantities)
-        print(self.dishes)
+# class Cart:
+#
+#     def __init__(self, item_names, quantities, price, dishes):
+#         self.item_names = item_names
+#         self.quantities = quantities
+#         self.dishes = dishes
+#         print(self.item_names)
+#         print(self.quantities)
+#         print(self.dishes)
 def main():
 
 
