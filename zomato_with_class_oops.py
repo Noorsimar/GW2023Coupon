@@ -4,7 +4,21 @@ from Session7 import Menu, Dish
     Zomato Cart
 """
 
+class Cart:
+    def __init__(self, item_ids=[], quantities=[], price=[], dishes=[]):
+        self.item_ids = item_ids
+        self.quantities = quantities
+        self.dishes = dishes
+        self.price = price
 
+    def show(self):
+        print("Food ID:", self.item_ids)
+        print("Cart Dishes:", end=" ")
+        for item in self.item_ids:
+            print(self.dishes[item].name, end=", ")
+        print("\nCart Quantities:", self.quantities)
+    def calculate_cart(self):
+        return sum(self.price)
 
 def valid_coupons(amount):
     welcome50 = {"coupon": "WELCOME50",
@@ -55,26 +69,6 @@ def valid_coupons(amount):
 
     if discount == 0:
         print(promo_code, "Coupon NOT Valid")
-
-
-class Cart:
-    def __init__(self, item_ids=[], quantities=[], price=[], dishes=[]):
-        self.item_ids = item_ids
-        self.quantities = quantities
-        self.dishes = dishes
-        self.price = price
-
-
-    def show(self):
-        print("Food ID:", self.item_ids)
-        print("Cart Dishes:", end=" ")
-        for item in self.item_ids:
-            print(self.dishes[item].name, end=", ")
-        print("\nCart Quantities:", self.quantities)
-
-    def calculate_cart(self):
-        return sum(self.price)
-
 def main():
     dish1 = Dish(name="Dal Makhani", price=350, rating=4.5)
     dish2 = Dish(name="Paneer Do Pyaza", price=450, rating=5.0)
