@@ -26,7 +26,7 @@ def valid_coupons(amount):
              "cashback": 0}
 
     all_coupons = [welcome50, zompaytm, rainy]
-    print(f"For Amount: {amount}")
+    print(f"Based on Amount: {amount}")
     for check_coupon in all_coupons:
         if amount >= check_coupon["minimum_order_size"]:
             # Calculate Max Off
@@ -38,7 +38,7 @@ def valid_coupons(amount):
                   check_coupon["cashback"])
 
         elif amount < 159:
-            print("minimum cart value for Discount Coupon is: \u20b9", 159)
+            print(f"No Coupons Available.\nMinimum cart value for Discount Coupon is: \u20b9", 159)
             break
 
     promo_code = input("\nEnter Promo Code: ").upper()
@@ -54,21 +54,28 @@ def valid_coupons(amount):
             print("Amount to pay: \u20b9", amount_to_pay)
 
     if discount == 0:
-        print(promo_code, "NOT Valid")
+        print(promo_code, "Coupon NOT Valid")
 
 
-# class Cart:
-#
-#     def __init__(self, item_names, quantities, price, dishes):
-#         self.item_names = item_names
-#         self.quantities = quantities
-#         self.dishes = dishes
-#         print(self.item_names)
-#         print(self.quantities)
-#         print(self.dishes)
+class Cart:
+    def __init__(self, item_ids=[], quantities=[], price=[], dishes=[]):
+        self.item_ids = item_ids
+        self.quantities = quantities
+        self.dishes = dishes
+        self.price = price
+
+
+    def show(self):
+        print("Food ID:", self.item_ids)
+        print("Cart Dishes:", end=" ")
+        for item in self.item_ids:
+            print(self.dishes[item].name, end=", ")
+        print("\nCart Quantities:", self.quantities)
+
+    def calculate_cart(self):
+        return sum(self.price)
+
 def main():
-
-
     dish1 = Dish(name="Dal Makhani", price=350, rating=4.5)
     dish2 = Dish(name="Paneer Do Pyaza", price=450, rating=5.0)
     dish3 = Dish(name="Noodles", price=250, rating=3.8)
@@ -87,6 +94,7 @@ def main():
 
     item_names = []
     quantities = []
+    item_ids = []
     price = []
 
     while True:
@@ -96,6 +104,7 @@ def main():
         item_names.append(dishes[item_id].name)
         quantities.append(quantity)
         price.append(dishes[item_id].price * quantity)
+        item_ids.append(item_id)
 
         print(price)
 
@@ -103,13 +112,15 @@ def main():
         if choice == "no":
             break
 
-    amount = sum(price)
-    print("\n$ $ $ $ $ $ $ $")
-    print("Item:", item_names)
-    print("Quantities:", quantities)
+    cart1 = Cart(item_ids, quantities, price, dishes)
+    amount = cart1.calculate_cart()
+
+
+    #amount = sum(price)
+    print("\n$ $ $ $ $ $ $ $\nYOUR CART")
+    cart1.show()
     print("TOTAL AMOUNT: \u20b9", amount)
     print("$ $ $ $ $ $ $ $\n")
-
 
 
     message = """
